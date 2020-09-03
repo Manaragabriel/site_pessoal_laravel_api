@@ -27,11 +27,27 @@ class CategoryController extends Controller
         }
     }
 
-    public function getCategory(Request $request){
-        return 'ola';
+    public function getCategory(Request $request, $id){
+        try{
+            
+            $category = $this->categoryService->getCategory($id);
+            $status = empty($category) ? '404' : '200';
+            return response($category, $status);
+
+        } catch (\Exception $exception) {
+            return response($exception,500);
+        }
     }
     public function getAllCategories(Request $request){
-        return 'ol';
+        try{
+            
+            $category = $this->categoryService->getAllCategories($_GET);
+            $status = empty($category) ? '404' : '200';
+            return response($category, $status);
+
+        } catch (\Exception $exception) {
+            return response($exception,500);
+        }
     }
     public function updateCategory(Request $request,$id){
         try{

@@ -18,6 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::group(['prefix' =>'category'],function(){
+    Route::get('/', 'CategoryController@getAllCategories');
     Route::get('/{id}', 'CategoryController@getCategory');
     Route::post('/', 'CategoryController@createCategory');
     Route::put('/{id}', 'CategoryController@updateCategory');

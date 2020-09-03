@@ -16,8 +16,20 @@ class CategoryService{
 
     public function getCategory($id){
         try{
-            $newCategory = Category::create($category);
-            return $newCategory;
+            $category = Category::where(['id' => $id])->first();
+            return $category;
+        } catch (\Exception $exception){
+            throw new \Exception($exception);
+        }
+    }
+
+    public function getAllCategories($params){
+        try{
+            $category = new Category();
+            if(isset($params['category'])){
+               $category = $category->where(['category' =>$params['category'] ]);
+            }
+            return $category->paginate(2);
         } catch (\Exception $exception){
             throw new \Exception($exception);
         }
