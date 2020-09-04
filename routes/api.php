@@ -24,3 +24,19 @@ Route::group(['prefix' =>'category'],function(){
     Route::put('/{id}', 'CategoryController@updateCategory');
     Route::delete('/{id}', 'CategoryController@deleteCategory');
 });
+
+Route::group(['prefix' =>'post'],function(){
+    Route::get('/', 'PostController@getAllPosts');
+    Route::get('/{id}', 'PostController@getPost');
+    Route::post('/', 'PostController@createPost');
+    Route::put('/{id}', 'PostController@updatePost');
+    Route::delete('/{id}', 'PostController@deletePost');
+});
+
+Route::group(['prefix' =>'user'],function(){
+    Route::get('/', 'UserController@getAllUsers');
+    Route::get('/{id}', 'UserController@getUser');
+    Route::post('/', 'UserController@createUser');
+    Route::put('/{id}', 'UserController@updateUser');
+    Route::delete('/{id}', 'UserController@deleteUser');
+});
