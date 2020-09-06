@@ -12,6 +12,9 @@ export default {
                
             }
         }
+        if(localStorage.getItem('auth_token')){
+            configAxios.headers.Authorization = 'Bearer ' + localStorage.getItem('auth_token')
+        }
         return new Promise((resolve, reject) => {
             axios(configAxios).then((response) => {
                 console.log(response);

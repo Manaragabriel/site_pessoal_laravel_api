@@ -20,23 +20,30 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['prefix' =>'category'],function(){
     Route::get('/', 'CategoryController@getAllCategories');
     Route::get('/{id}', 'CategoryController@getCategory');
-    Route::post('/', 'CategoryController@createCategory');
-    Route::put('/{id}', 'CategoryController@updateCategory');
-    Route::delete('/{id}', 'CategoryController@deleteCategory');
+    Route::post('/', 'CategoryController@createCategory')->middleware('auth:api');
+    Route::put('/{id}', 'CategoryController@updateCategory')->middleware('auth:api');
+    Route::delete('/{id}', 'CategoryController@deleteCategory')->middleware('auth:api');
 });
 
 Route::group(['prefix' =>'post'],function(){
     Route::get('/', 'PostController@getAllPosts');
     Route::get('/{id}', 'PostController@getPost');
-    Route::post('/', 'PostController@createPost');
-    Route::put('/{id}', 'PostController@updatePost');
-    Route::delete('/{id}', 'PostController@deletePost');
+    Route::post('/', 'PostController@createPost')->middleware('auth:api');
+    Route::put('/{id}', 'PostController@updatePost')->middleware('auth:api');
+    Route::delete('/{id}', 'PostController@deletePost')->middleware('auth:api');
 });
 
 Route::group(['prefix' =>'user'],function(){
-    Route::get('/', 'UserController@getAllUsers');
-    Route::get('/{id}', 'UserController@getUser');
-    Route::post('/', 'UserController@createUser');
-    Route::put('/{id}', 'UserController@updateUser');
-    Route::delete('/{id}', 'UserController@deleteUser');
+    Route::get('/', 'UserController@getAllUsers')->middleware('auth:api');
+    Route::get('/{id}', 'UserController@getUser')->middleware('auth:api');
+    Route::post('/', 'UserController@createUser')->middleware('auth:api');
+    Route::put('/{id}', 'UserController@updateUser')->middleware('auth:api');
+    Route::delete('/{id}', 'UserController@deleteUser')->middleware('auth:api');
+});
+
+Route::group(['prefix' =>'auth'],function(){
+    Route::post('login', 'AuthController@login');
+    Route::post('logout', 'AuthController@logout');
+    Route::post('refresh', 'AuthController@refresh');
+    Route::post('me', 'AuthController@me');
 });

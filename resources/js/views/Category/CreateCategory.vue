@@ -6,7 +6,7 @@
          
             <div class="ml-200 p-3 mt-5 bg-white br-20">
                 <div class="d-flex justify-content-between">
-                    <h4>Criar novo Post</h4>
+                    <h4>Criar nova categoria</h4>
                 </div>
 
 
@@ -39,9 +39,12 @@
 
 <script>
 import Request from '../../libraries/Request';
-import querystring from 'querystring';
+import Auth from '../../libraries/Auth';
 export default {
 
+    created(){
+        Auth.VerifyLogin();
+    },
     data(){
         return {
             category: {category:'', color: ''},

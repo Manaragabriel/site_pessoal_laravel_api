@@ -37,6 +37,7 @@
 
 <script>
 import Request from '../../libraries/Request';
+import Auth from '../../libraries/Auth';
 export default {
 
     data(){
@@ -47,6 +48,7 @@ export default {
     },
 
     created(){
+        Auth.VerifyLogin();
         this.getCategory()
     },
 

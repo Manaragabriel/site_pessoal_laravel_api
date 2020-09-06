@@ -51,7 +51,7 @@
 
 <script>
 import Request from '../../libraries/Request';
-import querystring from 'querystring';
+import Auth from '../../libraries/Auth';
 export default {
 
     data(){
@@ -63,6 +63,7 @@ export default {
     },
 
     created(){
+        Auth.VerifyLogin();
         this.getPost();
         this.getCategories();
     },

@@ -51,10 +51,11 @@
 
 <script>
 import Request from '../../libraries/Request';
-import querystring from 'querystring';
+import Auth from '../../libraries/Auth';
 export default {
 
     created(){
+        Auth.VerifyLogin();
         this.getCategories();
     },
     data(){

@@ -7,6 +7,10 @@ import EditPost from '../views/Post/EditPost.vue'
 import Category from '../views/Category/Category.vue'
 import CreateCategory from '../views/Category/CreateCategory.vue'
 import EditCategory from '../views/Category/EditCategory.vue'
+import Login from '../views/Login/Login.vue'
+
+
+
 
 Vue.use(VueRouter)
  
@@ -45,6 +49,11 @@ Vue.use(VueRouter)
     path: '/categorias/editar/:id',
     name: 'Editar categorias',
     component: EditCategory
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
   }
 ]
 
@@ -52,5 +61,6 @@ const router = new VueRouter({
   mode: 'history',
   routes
 })
+
 
 export default router

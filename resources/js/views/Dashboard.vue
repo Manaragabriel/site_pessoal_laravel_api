@@ -13,9 +13,12 @@
 </template>
 
 <script>
-
-export default {
-    
+import Auth from '../libraries/Auth';
+export default {    
+    created(){
+        Auth.VerifyLogin();
+    }
+ 
 
 }
 </script>
