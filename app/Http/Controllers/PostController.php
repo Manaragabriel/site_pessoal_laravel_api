@@ -19,6 +19,7 @@ class PostController extends Controller
                 'title' => 'required|max:255',
                 'subtitle' => 'required|max:255',
                 'content' => 'required',
+                'category_id' => 'integer'
             ]);
             $newPost = $this->postService->createPost($validPost);
             return response($newPost, '200');
@@ -57,6 +58,7 @@ class PostController extends Controller
                 'title' => 'required|max:255',
                 'subtitle' => 'required|max:255',
                 'content' => 'required',
+                'category_id' => 'integer'
             ]);
             
             $updatedPost = $this->postService->updatePost($validPost,$id);

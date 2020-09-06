@@ -17,6 +17,7 @@ class PostService{
     public function getPost($id){
         try{
             $post = Post::where(['id' => $id])->first();
+            $post['category'] = $post->category;
             return $post;
         } catch (\Exception $exception){
             throw new \Exception($exception);
@@ -41,6 +42,7 @@ class PostService{
             $updatedPost['title'] = $post['title'];
             $updatedPost['subtitle'] = $post['subtitle'];
             $updatedPost['content'] = $post['content'];
+            $updatedPost['category_id'] = $post['category_id'];
             $updatedPost->save();
             
             return $updatedPost;

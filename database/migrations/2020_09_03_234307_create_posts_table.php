@@ -21,6 +21,8 @@ class CreatePostsTable extends Migration
             $table->text('content');
             $table->unsignedBigInteger('author_id')->nullable();
             $table->foreign('author_id')->references('id')->on('users');
+            $table->unsignedBigInteger('category_id')->nullable();
+            $table->foreign('category_id')->references('id')->on('categories');
 
         });
     }

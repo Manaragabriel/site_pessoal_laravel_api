@@ -29,7 +29,15 @@
                     <textarea  v-model="post.content" class="form-control"/>
                      <p class="red-color" v-for="(contentErrors, index) in validationsErrors.content" v-bind:key="index">{{contentErrors}}</p>
                 </div>
-    
+
+                <div class="form-group col-lg-4 p-0">
+                    <label>Categoria</label>
+                    <select v-model="post.category_id" class="form-control">
+                        <option v-for="(category, index) in categories" v-bind:key="index" v-bind:value="category.id">{{category.category}}</option>
+                    </select>
+                    
+                </div>
+
                 <div class="text-right">
                     <b-button size="lg" v-on:click="createPost" variant="primary">Salvar</b-button>
                 </div>
@@ -46,10 +54,15 @@ import Request from '../../libraries/Request';
 import querystring from 'querystring';
 export default {
 
+    created(){
+        this.getCategories();
+    },
     data(){
         return {
-            post: {title:'', subtitle: '',content: ''},
+            post: {title:'', subtitle: '',content: '',category_id: ''},
+            categories: [],
             validationsErrors : {title: [], subtitle: [], content: []},
+        
         }
     },
 
@@ -73,6 +86,13 @@ export default {
                     
                }
            },
+
+        async getCategories(){
+            const endpoint =  'category/'
+            const requisicao = await Request.send({method: 'get', endpoint , data:{}})
+            this.categories = requisicao.data.data;         
+        },
+
 
     }
     

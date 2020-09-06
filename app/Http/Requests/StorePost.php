@@ -27,6 +27,7 @@ class StorePost extends FormRequest
             'title' => 'required|max:255',
             'subtitle' => 'required|max:255',
             'content' => 'required',
+            'category_id' => 'integer'
         ];
     }
 
