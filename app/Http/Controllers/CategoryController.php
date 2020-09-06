@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Services\CategoryService;
-
+use App\Http\Requests\StoreCategory;
 class CategoryController extends Controller
 {
     private $categoryService;
@@ -12,7 +12,7 @@ class CategoryController extends Controller
     public function __construct(CategoryService $categoryService){
         $this->categoryService = $categoryService;
     }
-    public function createCategory(Request $request){
+    public function createCategory(StoreCategory $request){ 
         try{
 
             $validCategory = $request->validate([
@@ -49,7 +49,7 @@ class CategoryController extends Controller
             return response($exception,500);
         }
     }
-    public function updateCategory(Request $request,$id){
+    public function updateCategory(StoreCategory $request,$id){
         try{
 
             $validCategory = $request->validate([

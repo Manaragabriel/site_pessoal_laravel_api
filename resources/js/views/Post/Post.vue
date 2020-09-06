@@ -6,34 +6,29 @@
          
             <div class="ml-200 p-3 mt-5 bg-white br-20">
                 <div class="d-flex justify-content-between">
-                    <h4>Lista de Post's</h4>
-                    <a class="btn btn-primary" href="/contacts/create">Add new</a>
+                    <h4 class="mt-0">Lista de Post's</h4>
+                    <a class="btn btn-primary" href="/posts/criar">Adicionar novo</a>
                 </div>
-
-               <div class="alert alert-success mt-2" v-if="success">
-                   <span>Contact inserted with successful!</span>
-               </div>
 
                 <table class="table mt-3">
                     <thead>
                         <tr>
                             <th scope="col">ID</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Action</th>
+                            <th scope="col">Titulo</th>
+                            <th scope="col">Subtitulo</th>
+                            <th scope="col">Ação</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        <tr v-for="contact in contacts" v-bind:key="contact.id">
-                            <th scope="row">{{contact.id}}</th>
-                            <td>{{contact.name}}</td>
-                            <td>{{contact.email}}</td>
+                        <tr v-for="post in posts" v-bind:key="post.id">
+                            <th scope="row">{{post.id}}</th>
+                            <td>{{post.title}}</td>
+                            <td>{{post.subtitle}}</td>
                             <td>
                                 
-                                <b-icon-phone class="hover"  v-on:click="goPhonesList(contact.id)" ></b-icon-phone>
-                                <b-icon-pencil-square class="hover" v-on:click="goEdit(contact.id)" ></b-icon-pencil-square>
-                                <b-icon-trash v-on:click="deleteContact(contact.id)" class="hover"></b-icon-trash>
+                                <b-icon-pencil-square class="hover" v-on:click="goEdit(post.id)" ></b-icon-pencil-square>
+                                <BIconTrash v-on:click="deletePost(post.id)" class="hover"></BIconTrash>
                             </td>
                         </tr>
                        
@@ -59,14 +54,13 @@ import Request from '../../libraries/Request';
 export default {
    
     created(){
-        this.getContacts();
+        this.getPosts();
     },
 
     data() {
         return {
-            contacts: [{name:"gabriel", email: "teste"}],
-            contact: { name:"", email: "", address: "" },
-            validationsErrors : {name:[], email: []},
+            posts: [],
+            post: {id:"", title:"", subtitle: "", content: "" },
             currentPage: null,
             prevPage: null,
             nextPage: null,
@@ -75,25 +69,23 @@ export default {
     },
     methods: {
 
-         
-
             goEdit(id){
-                this.$router.push('contacts/edit/'+id)
+                this.$router.push('posts/editar/'+id)
             },
-            async getContacts(){
-                const endpoint = this.pageAction != null ? 'contact/'+this.pageAction : 'contact/'
+            async getPosts(){
+                const endpoint = this.pageAction != null ? 'post/'+this.pageAction : 'post/'
                 const requisicao = await Request.send({method: 'get', endpoint , data:{}})
-                this.contacts = requisicao.data.data
+                this.posts = requisicao.data.data;
                 this.currentPage = requisicao.data.current_page
                 this.prevPage = requisicao.data.prev_page_url != null ? requisicao.data.prev_page_url.slice(-1) : null;
-                this.nextPage = requisicao.data.next_page_url != null ? requisicao.data.next_page_url.slice(-1) : null;
+                this.nextPage = requisicao.data.next_page_url != null ? requisicao.data.next_page_url.slice(-1) : null; 
             },
 
 
-           async deleteContact(id){
+           async deletePost(id){
                try{
-                   await Request.send({method: 'DELETE', endpoint: 'contact/'+id,data:{}});
-                   this.getContacts();
+                   await Request.send({method: 'DELETE', endpoint: 'post/'+id,data:{}});
+                   this.getPosts();
                } catch (error){
                     console.log(error)
                }
@@ -104,7 +96,7 @@ export default {
                }else{
                    this.pageAction = '?page='+this.nextPage
                }
-               this.getContacts()
+               this.getPosts()
            }
           
     }

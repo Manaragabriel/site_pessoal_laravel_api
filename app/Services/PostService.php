@@ -29,7 +29,7 @@ class PostService{
             if(isset($params['title'])){
                $post = $post->where('title','like', '%'.$params['title'].'%');
             }
-            return $post->paginate(12);
+            return $post->paginate(4);
         } catch (\Exception $exception){
             throw new \Exception($exception);
         }

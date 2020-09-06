@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Services\PostService;
-
+use App\Http\Requests\StorePost;
 class PostController extends Controller
 {
     private $postService;
@@ -12,7 +12,7 @@ class PostController extends Controller
     public function __construct(PostService $postService){
         $this->postService = $postService;
     }
-    public function createPost(Request $request){
+    public function createPost(StorePost $request){
         try{
 
             $validPost = $request->validate([
@@ -50,7 +50,7 @@ class PostController extends Controller
             return response($exception,500);
         }
     }
-    public function updatePost(Request $request,$id){
+    public function updatePost(StorePost $request,$id){
         try{
 
             $validPost = $request->validate([
