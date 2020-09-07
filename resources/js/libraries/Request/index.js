@@ -12,7 +12,7 @@ export default {
                
             }
         }
-        console.log(configAxios.url);
+        console.log(configAxios.url)
         if(localStorage.getItem('auth_token')){
             configAxios.headers.Authorization = 'Bearer ' + localStorage.getItem('auth_token')
         }
