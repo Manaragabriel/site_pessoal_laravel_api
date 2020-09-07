@@ -4,7 +4,7 @@ export default {
 
     send(config){
         const configAxios ={
-            url: 'http://localhost:8000/api/'+config.endpoint,
+            url: 'https://gabriel-manara-api.herokuapp.com/api/'+config.endpoint,
             method: config.method,
             data: config.data,
             headers : {
