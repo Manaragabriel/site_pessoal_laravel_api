@@ -19,9 +19,18 @@ class PostController extends Controller
                 'title' => 'required|max:255',
                 'subtitle' => 'required|max:255',
                 'content' => 'required',
-                'category_id' => 'integer'
+                'category_id' => 'integer',
             ]);
+            if($request->hasFile('image')){
+                $image = $request->file('image');
+                $name = time().'.'.$image->getClientOriginalExtension();
+                $destinationPath = public_path('/uploads');
+                $image->move($destinationPath, $name);
+                $validPost['image'] = $name;
+                
+            }
             $newPost = $this->postService->createPost($validPost);
+
             return response($newPost, '200');
 
         } catch (\Exception $exception) {

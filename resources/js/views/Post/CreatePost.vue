@@ -38,6 +38,13 @@
                     
                 </div>
 
+                <div class="p-0">
+                    <label>Selecionar imagem de capa</label>
+                    <br>
+                     <input type="file" ref="image" v-on:change="selectFile"/>
+                    
+                </div>
+
                 <div class="text-right">
                     <b-button size="lg" v-on:click="createPost" variant="primary">Salvar</b-button>
                 </div>
@@ -60,7 +67,7 @@ export default {
     },
     data(){
         return {
-            post: {title:'', subtitle: '',content: '',category_id: ''},
+            post: {title:'', subtitle: '',content: '',category_id: '', image: null},
             categories: [],
             validationsErrors : {title: [], subtitle: [], content: []},
         
@@ -70,23 +77,32 @@ export default {
     methods: {
     
          async createPost(){
-               try{
-                   const data = this.post;
-                   await Request.send({method: 'post' ,endpoint: 'post', data,})
-                   alert("Criado com sucesso")
-                   this.$router.push('/posts')
-               } catch (error){
-                  
-                   if(error.response.status == 422){
-                       const keys = Object.keys(error.response.data.errors)
-                        keys.forEach((value) =>  {
-                            this.validationsErrors[value] = error.response.data.errors[value]
-                        })
-                   
-                   }
-                    
-               }
-           },
+            try{
+                const data = new FormData();
+                data.append('title', this.post.title);
+                data.append('subtitle', this.post.subtitle);
+                data.append('content', this.post.content);
+                data.append('category_id', this.post.category_id);
+                data.append('image', this.post.image);
+                await Request.send({method: 'post' ,endpoint: 'post', data,})
+                alert("Criado com sucesso")
+                this.$router.push('/posts')
+            } catch (error){
+                
+                if(error.response.status == 422){
+                    const keys = Object.keys(error.response.data.errors)
+                    keys.forEach((value) =>  {
+                        this.validationsErrors[value] = error.response.data.errors[value]
+                    })
+                
+                }
+                
+            }
+        },
+        async selectFile(file){
+            this.post.image = this.$refs.image.files[0];
+            console.log(this.post)
+        },
 
         async getCategories(){
             const endpoint =  'category/'

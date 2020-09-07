@@ -32,11 +32,11 @@ Route::group(['prefix' =>'post'],function(){
     Route::put('/{id}', 'PostController@updatePost')->middleware('auth:api');
     Route::delete('/{id}', 'PostController@deletePost')->middleware('auth:api');
 });
-
+ 
 Route::group(['prefix' =>'user'],function(){
     Route::get('/', 'UserController@getAllUsers')->middleware('auth:api');
     Route::get('/{id}', 'UserController@getUser')->middleware('auth:api');
-    Route::post('/', 'UserController@createUser')->middleware('auth:api');
+    Route::post('/', 'UserController@createUser');
     Route::put('/{id}', 'UserController@updateUser')->middleware('auth:api');
     Route::delete('/{id}', 'UserController@deleteUser')->middleware('auth:api');
 });
