@@ -6,7 +6,7 @@
          
             <div class="ml-200 p-3 mt-5 bg-white br-20">
                 <div class="d-flex justify-content-between">
-                    <h4>Editar o post</h4>
+                    <h4>Editar a categoria</h4>
                 </div>
 
 
