@@ -3,10 +3,10 @@
         <h4 class="color-white font-weight-bold">Painel Admin</h4>
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link color-white"  href="categorias">Categorias</a>
+                <a class="nav-link color-white"  href="/categorias">Categorias</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link color-white" href="posts">Posts</a>
+                <a class="nav-link color-white" href="/posts">Posts</a>
             </li>
       
         </ul>
