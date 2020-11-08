@@ -16,7 +16,19 @@
 import Auth from '../libraries/Auth';
 export default {    
     created(){
+        
         Auth.VerifyLogin();
+        
+        Echo.join(`chat.2`)
+            .here((users) => {
+                //
+            })
+            .joining((user) => {
+                console.log('teste');
+            })
+            .leaving((user) => {
+                console.log('treste');
+            });
     }
  
 

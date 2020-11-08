@@ -55,8 +55,13 @@ import Auth from '../../libraries/Auth';
 export default {
    
     created(){
+        console.log('teste')
         Auth.VerifyLogin();
-        this.getCategories();
+        Echo.channel('channel-name').listen('SocketTest',(e) => {
+            console.log(e)
+        })
+         
+    
     },
 
     data() {
